@@ -1,0 +1,10 @@
+.AddBook{
+    display: flex;
+    flex-direction: column;
+}
+.AddBook .Input{
+    margin-bottom: 15px;
+}
+.AddBook button{
+    margin: 30px 0;
+}

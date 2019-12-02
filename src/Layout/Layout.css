@@ -1,0 +1,23 @@
+.Layout{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.Header{
+    font-size: 26px;
+    padding: 15px 20px;
+}
+.Main{
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    background: lightgrey;
+    padding: 15px 20px;
+}
+
+.Footer{
+    padding: 15px 20px;
+    flex: 0 0 auto;
+    height: 75px;
+    background: lightblue;
+}
