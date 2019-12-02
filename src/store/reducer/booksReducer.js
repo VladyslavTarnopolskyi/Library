@@ -9,7 +9,8 @@ const initialState = [
     genre: ['Fantasy', 'Thriller', 'Detective'],
     nums: 5,
     dateStart: new Date(),
-    dateReturn: new Date()
+    dateReturn: new Date(),
+    type: 'newBook'
   },
   {
     title: 'Кобзар',
@@ -19,7 +20,8 @@ const initialState = [
     genre: ['Поезія'],
     nums: 500,
     dateStart: new Date(),
-    dateReturn: new Date()
+    dateReturn: new Date(),
+    type: 'newBook'
   }
 ];
 
@@ -38,7 +40,8 @@ export default function booksReducer(state = initialState, action) {
         genre: action.payload.genre,
         nums: action.payload.nums,
         dateStart: new Date(),
-        dateReturn: new Date()
+        dateReturn: new Date(),
+        type: 'newBook'
       });
       return newState;
     }

@@ -25,7 +25,8 @@ class AddBook extends Component{
     author: '',
     year: 0,
     genre: [],
-    nums: 0
+    nums: 0,
+    type: ''
   };
   onChangeTitle = (event) => {
     this.setState({title: event.target.value});
@@ -65,7 +66,8 @@ class AddBook extends Component{
         id: 0,
         year: 1900,
         genre: [],
-        nums: 0
+        nums: 0,
+        type: 'newBook'
       })
     }
     return;
@@ -73,7 +75,10 @@ class AddBook extends Component{
   onSubmit = (event) => {
     event.preventDefault();
   };
+  handleChangeColor = () => {
 
+    // props.dispatch(changeColor(reader.id, book.d, bookColor));
+  };
   render() {
 
     return (

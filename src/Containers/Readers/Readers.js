@@ -3,11 +3,13 @@ import {connect} from "react-redux";
 import ReadersList from "../../Components/ReadersList/ReadersList";
 
 class Readers extends Component{
+
   render() {
+
     return (
       <div className='readers'>
         <h2>Readers</h2>
-        <ReadersList readers={this.props.readers}/>
+        <ReadersList readers={this.props.readers} />
       </div>
     )
   }

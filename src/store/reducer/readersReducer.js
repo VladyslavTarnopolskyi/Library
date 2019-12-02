@@ -13,7 +13,8 @@ const initialState = [
         genre: ['Fantasy', 'Thriller', 'Detective'],
         nums: 5,
         dateStart: new Date(2019, 9, 16).toLocaleDateString(),
-        dateReturn: new Date(2020,11,24).toLocaleDateString()
+        dateReturn: new Date(2020,11,24).toLocaleDateString(),
+        type: 'oneDayToClosed'
       },
       {
         title: 'Кобзар',
@@ -22,7 +23,8 @@ const initialState = [
         year: 2009,
         genre: ['Поезія'],
         dateStart: new Date(2019, 9, 15).toLocaleDateString(),
-        dateReturn: new Date(2020,0,20).toLocaleDateString()
+        dateReturn: new Date(2020,0,20).toLocaleDateString(),
+        type: 'newBook'
       }
     ]
   },
@@ -37,7 +39,8 @@ const initialState = [
         year: 2009,
         genre: ['Поезія'],
         dateStart: new Date(2019,10,1).toLocaleDateString(),
-        dateReturn: new Date(2019,10,1).toLocaleDateString()
+        dateReturn: new Date(2019,10,1).toLocaleDateString(),
+        type: 'newBook'
       }
     ]
   }
@@ -46,29 +49,6 @@ const initialState = [
 export default function readersReducer(state = initialState, action) {
   switch (action.type){
 
-    // case CONSTS.ADD_READERS: {
-    //   let newState = [...state];
-    //   let readersId = newState.map( item => item.id );
-    //   if ( !readersId.length ) readersId.push(0);
-    //   newState.push({
-    //     id: Math.max(...readersId) + 1,
-    //     name: action.payload,
-    //     readingBooks: []
-    //   });
-    //   return newState;
-    // }
-    // case CONSTS.TAKE_BOOK: {
-    //   console.log('TAKE_BOOK');
-    //   let newState = [...state];
-    //   let {readerId, book, bookId, returnDate} = action.payload;
-    //   newState.map((reader) => {
-    //     if (readerId === reader.id) {
-    //       book.dateReturn = returnDate;
-    //       reader.readingBooks.push(book)
-    //     }
-    //   });
-    //   return newState;
-    // }
     case CONSTS.TAKE_BOOK: {
       console.log("state", state);
       let {readerId, book} = action.payload;
@@ -91,6 +71,19 @@ export default function readersReducer(state = initialState, action) {
           books.splice(index, 1);
         }
       });
+      return newState;
+    }
+    case CONSTS.CHANGE_COLOR: {
+      const { readerId, bookId, color } = action.payload;
+      const newState = [...state];
+      const books = state[readerId].readingBooks;
+      books.forEach((book, index) =>{
+        if ( book.id === bookId ) {
+          console.log(color);
+          book.type = color;
+        }
+      });
+
       return newState;
     }
     // case CONSTS.SAVE_DATE: {

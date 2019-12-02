@@ -10,43 +10,44 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import {connect} from "react-redux";
-// import {takeBook, saveDate} from "../../store/action/readersAction";
 
-const Popup = ({readers, books, open, onClosePopup, book, bookId}) => {
+const Popup = ({readers, open, onClosePopup, book}) => {
   const [returnDate, setDate] = useState(new Date());
   const [readerId, setReaderID] = useState();
 
-
   const handleChangeDate = date => {
-    console.log('handleChangeDate', date.toLocaleDateString());
     setDate(date)
   };
-  const handleSelectDate = date => {
-    console.log('handleSelectDate', date.toLocaleDateString());
-    console.log(readerId);
-    // dispatch(saveDate(Number(readerId), bookId, date));
-
-  };
   const handleChangeReader = (event)=>{
-    console.log('handleChangeReader');
     event.preventDefault();
     setReaderID(event.target.value);
   };
+  const handleChangeColor=(book)=>{
+    const curDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf();
+    const returnDate = new Date(book.dateReturn.replace(/(\d+).(\d+).(\d+)/, '$3/$2/$1')).valueOf();
+    if (returnDate > curDate) {
+      book.type = 'oneDayToClosed';
+    } else if (returnDate === curDate) {
+      book.type = 'closedDay';
+    } else if (returnDate < curDate) {
+      book.type = 'closedCard';
+    }
+  };
   const handleTakeBook = () => {
-    console.log('handleTakeBook');
+    // eslint-disable-next-line
     readers.map((reader, index)=>{
-      if (reader.id == readerId){
-        console.log(reader.id);
-        console.log(readerId);
-        book.dateStart = new Date(1900,11,11).toLocaleDateString();
+      if (reader.id === Number(readerId)){
+        book.dateStart = new Date(2019,10,30).toLocaleDateString();
         book.dateReturn = returnDate.toLocaleDateString();
         book.nums -=1;
+        handleChangeColor(book);
         reader.readingBooks.push(book);
       }
-    })
+    });
 
     // dispatch(takeBook(Number(readerId), newBook, book.id))
   };
+
   return (
       <Dialog
         open={open}
@@ -69,7 +70,6 @@ const Popup = ({readers, books, open, onClosePopup, book, bookId}) => {
 
           <DatePicker
             selected={returnDate}
-            onSelect={handleSelectDate}
             onChange={handleChangeDate}
           />
         </DialogContent>

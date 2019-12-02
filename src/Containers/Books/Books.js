@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 
 class Books extends Component{
   render() {
-    console.log(this.props);
     return (
       <div className={cls.Books}>
         <h1>Books catalog</h1>

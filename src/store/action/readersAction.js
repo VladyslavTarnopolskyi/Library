@@ -16,6 +16,12 @@ export const saveDate = (readerId, bookId, newDate)=>{
     payload: { readerId, bookId, newDate }
   }
 };
+export const changeColor = (readerId, bookId, color)=>{
+  return {
+    type: CONSTS.CHANGE_COLOR,
+    payload: { readerId, bookId, color }
+  }
+};
 
 export const returnBook = (readerId, bookId)=>{
   return{
