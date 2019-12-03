@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 const Popup = ({readers, open, onClosePopup, book}) => {
   const [returnDate, setDate] = useState(new Date());
   const [readerId, setReaderID] = useState();
+  const [info, setInfo] = useState(false);
 
   const handleChangeDate = date => {
     setDate(date)
@@ -26,24 +27,43 @@ const Popup = ({readers, open, onClosePopup, book}) => {
     const curDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).valueOf();
     const returnDate = new Date(book.dateReturn.replace(/(\d+).(\d+).(\d+)/, '$3/$2/$1')).valueOf();
     if (returnDate > curDate) {
-      book.type = 'oneDayToClosed';
+      book.type = 'newBook';
     } else if (returnDate === curDate) {
       book.type = 'closedDay';
     } else if (returnDate < curDate) {
-      book.type = 'closedCard';
+      book.type = 'overDate';
     }
+  };
+  const renderInfo =()=>{
+    return (
+      <div>Ви не можете взяти цю книгу. У вас уже є ця книга.</div>
+    )
   };
   const handleTakeBook = () => {
     // eslint-disable-next-line
     readers.map((reader, index)=>{
       if (reader.id === Number(readerId)){
-        book.dateStart = new Date(2019,10,30).toLocaleDateString();
-        book.dateReturn = returnDate.toLocaleDateString();
-        book.nums -=1;
-        handleChangeColor(book);
-        reader.readingBooks.push(book);
+        let idR = false;
+        reader.readingBooks.map((read)=>{
+          if (read.id === book.id){
+            idR = true;
+          }
+        });
+        if(idR){
+          console.log('taka knyha e');
+        } else {
+          console.log('new add');
+          book.dateStart = new Date().toLocaleDateString();
+          book.dateReturn = returnDate.toLocaleDateString();
+          book.nums -=1;
+          reader.readingBooks.push(book);
+          handleChangeColor(book);
+          onClosePopup();
+        }
+
       }
     });
+
 
     // dispatch(takeBook(Number(readerId), newBook, book.id))
   };
@@ -72,23 +92,20 @@ const Popup = ({readers, open, onClosePopup, book}) => {
             selected={returnDate}
             onChange={handleChangeDate}
           />
+          {info ? renderInfo : <span> </span>}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleTakeBook} color="primary">
-            add book
-          </Button>
           <Button autoFocus onClick={onClosePopup} color="primary">
-            Disagree
+            Закрити
           </Button>
-          <Button onClick={onClosePopup} color="primary" autoFocus>
-            Agree
+          <Button autoFocus onClick={handleTakeBook} color="primary">
+            Взяти кгину
           </Button>
         </DialogActions>
       </Dialog>
   );
 };
-const mapStateToProps = state => ({
-  readers: state.readers,
-  books: state.books
-});
-export default connect(mapStateToProps)(Popup);
+// const mapStateToProps = state => ({
+//   books: state.books
+// });
+export default connect()(Popup);

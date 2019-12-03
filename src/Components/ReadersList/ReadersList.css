@@ -1,3 +1,14 @@
-.ReadersList{
+.ReadersList th{
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+.ReadersList thead tr{
+    background: #1976d2;
+}
+.ReadersList .ReaderName{
+    font-size: 18px;
+    font-weight: bold;
 
 }

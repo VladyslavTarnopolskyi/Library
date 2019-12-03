@@ -23,10 +23,10 @@ class AddBook extends Component{
     id: 0,
     title: '',
     author: '',
-    year: 0,
+    year: 1900,
     genre: [],
-    nums: 0,
-    type: ''
+    nums: 1,
+    type: 'newBook'
   };
   onChangeTitle = (event) => {
     this.setState({title: event.target.value});
@@ -75,40 +75,42 @@ class AddBook extends Component{
   onSubmit = (event) => {
     event.preventDefault();
   };
-  handleChangeColor = () => {
-
-    // props.dispatch(changeColor(reader.id, book.d, bookColor));
-  };
   render() {
 
     return (
       <form onSubmit={this.onSubmit} className={cls.AddBook}>
-        <TextField className={cls.Input} type="text" label="Title" value={this.state.title} onChange={this.onChangeTitle}/>
-        <TextField className={cls.Input} type="text" label="Author" value={this.state.author} onChange={this.onChangeAuthor}/>
-        <TextField className={cls.Input} type="number" label="Year" value={this.state.year} onChange={this.onChangeYear}/>
+        <div>
+          <TextField className={cls.Input} type="text" label="Title" value={this.state.title} onChange={this.onChangeTitle}/>
+          <TextField className={cls.Input} type="text" label="Author" value={this.state.author} onChange={this.onChangeAuthor}/>
+        </div>
+        <div>
+          <TextField className={cls.Input} type="number" label="Year" value={this.state.year} onChange={this.onChangeYear}/>
+          <TextField className={cls.Input} type="number" label="Nums" value={this.state.nums} onChange={this.onChangeNumber}/>
+        </div>
+        <div>
+          <FormControl className={cls.Input}>
+            <InputLabel shrink htmlFor="select-multiple-native">
+              Виберіть жанр(и)
+            </InputLabel>
+            <Select
+              multiple
+              native
+              value={this.state.genre}
+              onChange={this.onChangeGenre}
+              inputProps={{
+                id: 'select-multiple-native',
+              }}
+            >
+              {genreName.map(name => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField className={cls.Input} type="text" label="Genre" value={this.state.genre} InputProps={{readOnly: true}} variant="filled"/>
+        </div>
 
-        <TextField className={cls.Input} type="number" label="Nums" value={this.state.nums} onChange={this.onChangeNumber}/>
-        <TextField className={cls.Input} type="text" label="Genre" value={this.state.genre} InputProps={{readOnly: true,}} variant="filled"/>
-        <FormControl>
-          <InputLabel shrink htmlFor="select-multiple-native">
-            Виберіть жанр(и)
-          </InputLabel>
-          <Select
-            multiple
-            native
-            value={this.state.genre}
-            onChange={this.onChangeGenre}
-            inputProps={{
-              id: 'select-multiple-native',
-            }}
-          >
-            {genreName.map(name => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
         <Button
           classes={{
             root: 'myClasses'

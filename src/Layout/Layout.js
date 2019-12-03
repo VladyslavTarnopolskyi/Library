@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import classes from './Layout.css';
+import cls from './Layout.css';
 import {CssBaseline, Drawer, Hidden, IconButton} from '@material-ui/core';
 import Navigation from "../Containers/Navigation/Navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,36 +20,34 @@ class Layout extends Component{
     return (
       <React.Fragment>
         <CssBaseline />
-        <div className={classes.Layout} >
-          <header className={classes.Header}>
+        <div className={cls.Layout} >
+          <header className={cls.Header}>
             <Hidden smUp>
-              <IconButton onClick={this.handleDrawerToggle}>
+              <IconButton onClick={this.handleDrawerToggle} style={{color: 'white'}}>
                 <FontAwesomeIcon icon={faBars} />
               </IconButton>
             </Hidden>
-            <span>Books Library</span>
+            <span className={cls.Logo}>LOGO</span>
             <Hidden smUp>
               <Drawer
                 variant="temporary"
                 open={this.state.isOpen}
                 onClose={this.handleDrawerToggle}
+
               >
                 <Navigation onClose={this.handleDrawerToggle}/>
               </Drawer>
             </Hidden>
             <Hidden xsDown>
-              <Drawer
-                variant="permanent"
-                open
-              >
+              <Drawer variant="permanent" open >
                 <Navigation onClose={this.handleDrawerToggle}/>
               </Drawer>
             </Hidden>
           </header>
-          <main className={classes.Main}>
+          <main className={cls.Main}>
             {this.props.children}
           </main>
-          <footer className={classes.Footer}>Footer</footer>
+          <footer className={cls.Footer}>&copy; Library</footer>
         </div>
       </React.Fragment>
     )

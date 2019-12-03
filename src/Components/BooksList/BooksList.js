@@ -1,4 +1,5 @@
 import React from "react";
+import cls from './BooksList.css'
 import {Table, TableBody, TableRow, TableCell, TableHead} from '@material-ui/core';
 import {connect} from "react-redux";
 import BookItem from "./BookItem";
@@ -8,7 +9,7 @@ const BooksList =(props)=>{
       <React.Fragment>
         <Table aria-label="simple table">
           <TableHead>
-            <TableRow style={{background: "darkgray"}}>
+            <TableRow className={cls.BooksList}>
               <TableCell style={{color: "white", fontWeight: 700}} component="th">Title</TableCell>
               <TableCell style={{color: "white", fontWeight: 700}} align="right">Author</TableCell>
               <TableCell style={{color: "white", fontWeight: 700}} align="right">Year</TableCell>

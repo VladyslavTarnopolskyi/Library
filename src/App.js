@@ -13,7 +13,7 @@ class App extends Component {
       <div className={cls.App}>
         <Layout>
           <Switch>
-            <Route path='/books' component={Books}/>
+            <Route path='/add-new-book' component={Books}/>
             <Route path='/readers' component={Readers}/>
             <Route path='/' component={Catalog}/>
           </Switch>

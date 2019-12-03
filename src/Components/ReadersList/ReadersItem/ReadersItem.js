@@ -2,6 +2,7 @@ import React from 'react';
 import cls from './ReadersItem.css'
 import {connect} from "react-redux";
 import {returnBook} from "../../../store/action/readersAction";
+import {TableCell, TableRow, Button} from "@material-ui/core";
 
 const ReadersItem =(props)=>{
   const handleReturnBook =() => {
@@ -14,20 +15,15 @@ const ReadersItem =(props)=>{
     })
   };
   return (
-    <div className='ReadersItem'>
-      <ul>
-        <li className={cls.ReadersItem + ' ' + cls[props.book.type]} >
-          <span>{props.book.title}</span>
-          <span>|</span>
-          <span>{props.book.author}</span>
-          <span>|</span>
-          <span>{props.book.dateStart}</span>
-          <span>|</span>
-          <span>{props.book.dateReturn}</span>
-          <button onClick={handleReturnBook}>Return book</button>
-        </li>
-      </ul>
-    </div>
+    <TableRow className={cls.ReadersItem + ' ' + cls[props.book.type]}>
+      <TableCell align="right">{props.book.title}</TableCell>
+      <TableCell align="right">{props.book.author}</TableCell>
+      <TableCell align="right">{props.book.dateStart}</TableCell>
+      <TableCell align="right">{props.book.dateReturn}</TableCell>
+      <TableCell align="right">
+        <Button size='small' variant="contained" color="primary" onClick={handleReturnBook}>Повернути книгу</Button>
+      </TableCell>
+    </TableRow>
   )
 };
 

@@ -2,14 +2,11 @@
 
 }
 .newBook{
-    background: lightgray;
+    background: #bbdefb;
 }
 .closedDay{
-    background: orange;
-}
-.closedCard{
-    background: red;
-}
-.oneDayToClosed{
     background: yellow;
+}
+.overDate{
+    background: #ef5350;
 }

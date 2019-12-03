@@ -1,3 +1,27 @@
 .Readers{
 
 }
+.checkColor{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.checkItem{
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+.color{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 10px;
+}
+.normalDate{
+    background: #bbdefb;
+}
+.badDate{
+    background: #ef5350;
+}

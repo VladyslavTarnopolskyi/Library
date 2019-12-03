@@ -14,7 +14,6 @@ class Catalog extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   books: state.books,
 });

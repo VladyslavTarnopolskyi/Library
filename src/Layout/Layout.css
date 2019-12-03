@@ -3,21 +3,29 @@
     flex-direction: column;
     min-height: 100vh;
 }
+.Layout h2{
+    border-bottom: 1px solid grey;
+}
 .Header{
     font-size: 26px;
     padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    background: #1976d2;
+}
+.Logo{
+    color: #fff;
 }
 .Main{
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
-    background: lightgrey;
     padding: 15px 20px;
 }
-
 .Footer{
     padding: 15px 20px;
     flex: 0 0 auto;
-    height: 75px;
-    background: lightblue;
+    text-align: center;
+    background: #1976d2;
+    color: #fff;
 }

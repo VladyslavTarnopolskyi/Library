@@ -4,9 +4,9 @@ import {NavLink} from "react-router-dom";
 import {List, ListItem }from "@material-ui/core";
 
 const links = [
-  {to: '/', label: 'Catalog', exact: true},
-  {to: '/books', label: 'Books', exact: false},
-  {to: '/readers', label: 'Readers', exact: false},
+  {to: '/', label: 'Каталог', exact: true},
+  {to: '/add-new-book', label: 'Додати книгу', exact: false},
+  {to: '/readers', label: 'Читачі', exact: false},
 ];
 
 class Navigation extends Component{
@@ -16,7 +16,7 @@ class Navigation extends Component{
   renderLinks(){
     return links.map((link, i)=>{
       return (
-        <ListItem button key={i} className={classes.ListItem}>
+        <ListItem button key={i} className={classes.ListItem} color="primary">
           <NavLink
             to={link.to}
             exact={link.exact}
@@ -31,8 +31,8 @@ class Navigation extends Component{
   }
   render() {
     return (
-      <nav>
-        <List className={classes.Navigation}>
+      <nav className={classes.Navigation}>
+        <List>
           {this.renderLinks()}
         </List>
       </nav>

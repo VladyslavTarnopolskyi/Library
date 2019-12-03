@@ -1,4 +1,16 @@
-.BooksList{
+.BooksList thead{
+    background: #1e88e5;
+}
+.BooksList th{
+    color: #fff;
+    font-size: 20px;
+}
+.allBtn, .wrapBtn{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.BooksList .wrapBtn{
     flex-direction: column;
+    justify-content: center;
 }

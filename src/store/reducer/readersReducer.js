@@ -13,8 +13,8 @@ const initialState = [
         genre: ['Fantasy', 'Thriller', 'Detective'],
         nums: 5,
         dateStart: new Date(2019, 9, 16).toLocaleDateString(),
-        dateReturn: new Date(2020,11,24).toLocaleDateString(),
-        type: 'oneDayToClosed'
+        dateReturn: new Date(2020,11,31).toLocaleDateString(),
+        type: 'newBook'
       },
       {
         title: 'Кобзар',
@@ -23,8 +23,8 @@ const initialState = [
         year: 2009,
         genre: ['Поезія'],
         dateStart: new Date(2019, 9, 15).toLocaleDateString(),
-        dateReturn: new Date(2020,0,20).toLocaleDateString(),
-        type: 'newBook'
+        dateReturn: new Date(2020,10,30).toLocaleDateString(),
+        type: 'overDate'
       }
     ]
   },
@@ -39,7 +39,7 @@ const initialState = [
         year: 2009,
         genre: ['Поезія'],
         dateStart: new Date(2019,10,1).toLocaleDateString(),
-        dateReturn: new Date(2019,10,1).toLocaleDateString(),
+        dateReturn: new Date(2020,1,15).toLocaleDateString(),
         type: 'newBook'
       }
     ]

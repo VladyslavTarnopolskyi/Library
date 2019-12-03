@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {IconButton, TableCell, TableRow} from "@material-ui/core";
+import cls from './BooksList.css'
+import {IconButton, TableCell, TableRow, Button} from "@material-ui/core";
 import {CheckBox, Close, Delete, Edit} from "@material-ui/icons";
 import {deleteBook, editBook} from "../../store/action/booksAction";
 import {connect} from "react-redux";
@@ -127,15 +128,21 @@ const BookItem =(props) =>{
           )}
         </TableCell>
         {isEditing ? (
-          <TableCell align="right">
-            <IconButton aria-label="edit" size="medium" onClick={handleFinishEditing}><CheckBox/></IconButton>
-            <IconButton aria-label="delete" size="medium"><Close/></IconButton>
+          <TableCell align="right" >
+            <div className={cls.wrapBtn}>
+              <IconButton aria-label="edit" size="small" onClick={handleFinishEditing}><CheckBox/></IconButton>
+              <IconButton aria-label="delete" size="small"><Close/></IconButton>
+            </div>
           </TableCell>
         ) : (
-          <TableCell align="right">
-            <IconButton aria-label="edit" size="medium" onClick={handleClickOpen}><Edit/></IconButton>
-            <IconButton aria-label="edit" size="medium" onClick={() => setIsEditing(true)} onSubmit={handleFinishEditing}><Edit/></IconButton>
-            <IconButton aria-label="delete" size="medium" onClick={handleDeleteBook}><Delete/></IconButton>
+          <TableCell align="right" >
+            <div className={cls.allBtn}>
+              <Button size='small' variant="contained" color="primary" onClick={handleClickOpen}>Взяти книгу</Button>
+              <div className={cls.wrapBtn}>
+                <IconButton aria-label="edit" size="small" onClick={() => setIsEditing(true)} onSubmit={handleFinishEditing}><Edit/></IconButton>
+                <IconButton aria-label="delete" size="small" onClick={handleDeleteBook}><Delete/></IconButton>
+              </div>
+            </div>
           </TableCell>
         )}
       </TableRow>
