@@ -6,15 +6,15 @@ import BookItem from "./BookItem";
 
 const BooksList =(props)=>{
     return (
-      <React.Fragment>
-        <Table aria-label="simple table">
+      <div className={cls.WrapBookTable}>
+        <Table aria-label="simple table" className={cls.Table}>
           <TableHead>
             <TableRow className={cls.BooksList}>
-              <TableCell style={{color: "white", fontWeight: 700}} component="th">Title</TableCell>
-              <TableCell style={{color: "white", fontWeight: 700}} align="right">Author</TableCell>
-              <TableCell style={{color: "white", fontWeight: 700}} align="right">Year</TableCell>
-              <TableCell style={{color: "white", fontWeight: 700}} align="right">Genre</TableCell>
-              <TableCell style={{color: "white", fontWeight: 700}} align="right">Nums</TableCell>
+              <TableCell style={{color: "white", fontWeight: 700}} component="th">Назва</TableCell>
+              <TableCell style={{color: "white", fontWeight: 700}} align="right">Автор</TableCell>
+              <TableCell style={{color: "white", fontWeight: 700}} align="right">Рік</TableCell>
+              <TableCell style={{color: "white", fontWeight: 700}} align="right">Жанр</TableCell>
+              <TableCell style={{color: "white", fontWeight: 700}} align="right">Кількість</TableCell>
               <TableCell style={{color: "white", fontWeight: 700}} align="right"></TableCell>
             </TableRow>
           </TableHead>
@@ -27,7 +27,7 @@ const BooksList =(props)=>{
             })
           }</TableBody>
         </Table>
-      </React.Fragment>
+      </div>
     )
 };
 

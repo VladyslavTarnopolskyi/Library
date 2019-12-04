@@ -10,7 +10,6 @@ class Layout extends Component{
   state = {
     isOpen: false
   };
-
   handleDrawerToggle =() =>{
     this.setState({
       isOpen: !this.state.isOpen
@@ -27,13 +26,12 @@ class Layout extends Component{
                 <FontAwesomeIcon icon={faBars} />
               </IconButton>
             </Hidden>
-            <span className={cls.Logo}>LOGO</span>
+            <span className={cls.Logo}>ЛОГОТИП</span>
             <Hidden smUp>
               <Drawer
                 variant="temporary"
                 open={this.state.isOpen}
                 onClose={this.handleDrawerToggle}
-
               >
                 <Navigation onClose={this.handleDrawerToggle}/>
               </Drawer>
@@ -47,7 +45,7 @@ class Layout extends Component{
           <main className={cls.Main}>
             {this.props.children}
           </main>
-          <footer className={cls.Footer}>&copy; Library</footer>
+          <footer className={cls.Footer}>&copy; Бібліотека</footer>
         </div>
       </React.Fragment>
     )

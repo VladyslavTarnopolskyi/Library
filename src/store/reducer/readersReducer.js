@@ -2,7 +2,7 @@ import {CONSTS} from "../action/actionTypes";
 
 const initialState = [
   {
-    name: 'John Doe',
+    name: 'Тоні Старк',
     id: 0,
     readingBooks: [
       {
@@ -10,7 +10,7 @@ const initialState = [
         author: 'Isaac Asimov',
         id: 0,
         year: 1950,
-        genre: ['Fantasy', 'Thriller', 'Detective'],
+        genre: ['Детектив','Триллер', 'Фантастика'],
         nums: 5,
         dateStart: new Date(2019, 9, 16).toLocaleDateString(),
         dateReturn: new Date(2020,11,31).toLocaleDateString(),
@@ -29,7 +29,7 @@ const initialState = [
     ]
   },
   {
-    name: 'John',
+    name: 'Людмила Загорецька',
     id: 1,
     readingBooks: [
       {
@@ -43,6 +43,21 @@ const initialState = [
         type: 'newBook'
       }
     ]
+  },
+  {
+    name: 'Джон Сноу',
+    id: 2,
+    readingBooks: [],
+  },
+  {
+    name: 'Джек Горобець',
+    id: 3,
+    readingBooks: [],
+  },
+  {
+    name: 'Брюс Вейн',
+    id: 4,
+    readingBooks: [],
   }
 ];
 
@@ -50,7 +65,6 @@ export default function readersReducer(state = initialState, action) {
   switch (action.type){
 
     case CONSTS.TAKE_BOOK: {
-      console.log("state", state);
       let {readerId, book} = action.payload;
       let newBook = book;
       let newState = [...state];
@@ -86,17 +100,6 @@ export default function readersReducer(state = initialState, action) {
 
       return newState;
     }
-    // case CONSTS.SAVE_DATE: {
-    //   const { readerId, bookId, newDate } = action.payload;
-    //   const newState = [...state];
-    //   const readingBooks = state[readerId].readingBooks;
-    //   readingBooks.forEach((book, index) =>{
-    //     if ( book.id === bookId) {
-    //       book.dateReturn = newDate;
-    //     }
-    //   });
-    //   return newState
-    // }
 
     default:
       return state

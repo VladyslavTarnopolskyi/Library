@@ -7,11 +7,12 @@ class Readers extends Component{
 
   render() {
     return (
-      <div className='readers'>
+      <div className={cls.Readers}>
         <h2>Список читачів</h2>
         <ul className={cls.checkColor}>
           <li className={cls.checkItem}><span className={cls.color+ ' ' + cls.normalDate}> </span><span>Видана книга</span></li>
           <li className={cls.checkItem}><span className={cls.color+ ' ' + cls.badDate}> </span><span>Прострочена дата повернення</span></li>
+          <li className={cls.checkItem}><span className={cls.color+ ' ' + cls.TodayDate}> </span><span>Сьогодні день поверенння</span></li>
         </ul>
         <ReadersList readers={this.props.readers} />
       </div>

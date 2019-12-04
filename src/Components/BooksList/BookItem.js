@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import cls from './BooksList.css'
-import {IconButton, TableCell, TableRow, Button} from "@material-ui/core";
+import {IconButton, TableCell, TableRow, Button,TextField} from "@material-ui/core";
 import {CheckBox, Close, Delete, Edit} from "@material-ui/icons";
 import {deleteBook, editBook} from "../../store/action/booksAction";
 import {connect} from "react-redux";
@@ -16,6 +16,7 @@ const genreName = [
   'Фентезі',
   'Казки',
   'Поезія',
+  'Програмування'
 ];
 
 const BookItem =(props) =>{
@@ -26,18 +27,32 @@ const BookItem =(props) =>{
   const [bookYear, setBookYear] = useState(props.book.year);
   const [bookGenre, setBookGenre] = useState([props.book.genre]);
   const [bookNums, setBookNums] = useState(props.book.nums);
+  const [isValidTakeBtn, setValidBtn]= useState(false);
+
+  const closeEdit=()=>{
+    setBookTitle(props.book.title);
+    setBookAuthor(props.book.author);
+    setBookYear(props.book.year);
+    setBookGenre([props.book.genre]);
+    setBookNums(props.book.nums);
+    setIsEditing(false)
+  };
 
   const handleClickOpen = () => {
     console.log('props.book.id',props.book.id);
     setOpen(true);
   };
-
+  const checkNum =()=>{
+    if (props.book.nums === 0){
+      setValidBtn(true)
+    }
+  };
   const handleClose = () => {
     setOpen(false);
+    checkNum();
   };
   const onChangeTitle = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
     setBookTitle(event.target.value)
   };
   const onChangeAuthor = (event) => {
@@ -80,22 +95,21 @@ const BookItem =(props) =>{
       <TableRow>
         <TableCell scope="row">
           {isEditing ? (
-            <input value={bookTitle} onChange={onChangeTitle}/>
+            <TextField value={bookTitle} onChange={onChangeTitle}/>
           ) : (
             <span>{props.book.title}</span>
           )}
-
         </TableCell>
         <TableCell align="right">
           {isEditing ? (
-            <input value={bookAuthor} onChange={onChangeAuthor}/>
+            <TextField value={bookAuthor} onChange={onChangeAuthor}/>
             ) : (
               <span>{props.book.author}</span>
           )}
         </TableCell>
         <TableCell align="right">
           {isEditing ? (
-            <input value={bookYear} onChange={onChangeYear}/>
+            <TextField type="number" value={bookYear} onChange={onChangeYear}/>
           ) : (
             <span>{props.book.year}</span>
           )}
@@ -122,7 +136,7 @@ const BookItem =(props) =>{
         </TableCell>
         <TableCell align="right">
           {isEditing ? (
-            <input value={bookNums} onChange={onChangeNumber}/>
+            <TextField type="number" value={bookNums} onChange={onChangeNumber}/>
           ) : (
             <span>{props.book.nums}</span>
           )}
@@ -131,13 +145,13 @@ const BookItem =(props) =>{
           <TableCell align="right" >
             <div className={cls.wrapBtn}>
               <IconButton aria-label="edit" size="small" onClick={handleFinishEditing}><CheckBox/></IconButton>
-              <IconButton aria-label="delete" size="small"><Close/></IconButton>
+              <IconButton aria-label="close" size="small" onClick={closeEdit}><Close/></IconButton>
             </div>
           </TableCell>
         ) : (
           <TableCell align="right" >
             <div className={cls.allBtn}>
-              <Button size='small' variant="contained" color="primary" onClick={handleClickOpen}>Взяти книгу</Button>
+              <Button size='small' variant="contained" color="primary" onClick={handleClickOpen} disabled={isValidTakeBtn}>Видати книгу</Button>
               <div className={cls.wrapBtn}>
                 <IconButton aria-label="edit" size="small" onClick={() => setIsEditing(true)} onSubmit={handleFinishEditing}><Edit/></IconButton>
                 <IconButton aria-label="delete" size="small" onClick={handleDeleteBook}><Delete/></IconButton>

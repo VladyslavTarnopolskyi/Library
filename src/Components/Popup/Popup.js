@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
 import cls from './Popup.css'
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button
-} from '@material-ui/core'
+import {Dialog, DialogTitle, DialogContent, DialogActions, Button}
+from '@material-ui/core'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import {connect} from "react-redux";
@@ -17,10 +12,15 @@ const Popup = ({readers, open, onClosePopup, book}) => {
   const [info, setInfo] = useState(false);
 
   const handleChangeDate = date => {
-    setDate(date)
+    setDate(date);
+  };
+  const closeDialog=()=>{
+    setInfo(false);
+    onClosePopup();
   };
   const handleChangeReader = (event)=>{
     event.preventDefault();
+    setInfo(false);
     setReaderID(event.target.value);
   };
   const handleChangeColor=(book)=>{
@@ -34,38 +34,30 @@ const Popup = ({readers, open, onClosePopup, book}) => {
       book.type = 'overDate';
     }
   };
-  const renderInfo =()=>{
-    return (
-      <div>Ви не можете взяти цю книгу. У вас уже є ця книга.</div>
-    )
-  };
   const handleTakeBook = () => {
     // eslint-disable-next-line
     readers.map((reader, index)=>{
       if (reader.id === Number(readerId)){
         let idR = false;
+        // eslint-disable-next-line
         reader.readingBooks.map((read)=>{
           if (read.id === book.id){
             idR = true;
           }
         });
         if(idR){
-          console.log('taka knyha e');
+          setInfo(true)
         } else {
-          console.log('new add');
           book.dateStart = new Date().toLocaleDateString();
           book.dateReturn = returnDate.toLocaleDateString();
           book.nums -=1;
           reader.readingBooks.push(book);
           handleChangeColor(book);
+          setInfo(false);
           onClosePopup();
         }
-
       }
     });
-
-
-    // dispatch(takeBook(Number(readerId), newBook, book.id))
   };
 
   return (
@@ -74,28 +66,29 @@ const Popup = ({readers, open, onClosePopup, book}) => {
         onClose={onClosePopup}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{"Видача книги"}</DialogTitle>
         <DialogContent className={cls.wrapDialogContent}>
-          <select
-            onChange={handleChangeReader}
-          >
-            <option>- take reader -</option>
-            {readers.map((reader, index)=>{
-                return (
-                  <option key={index} value={reader.id} >{reader.name}</option>
-                )
-              })
-            }
-          </select>
-
+          <div className={cls.wrapSelect}>
+            <select
+              onChange={handleChangeReader}
+            >
+              <option>Виберіть читача</option>
+              {readers.map((reader, index)=>{
+                  return (
+                    <option key={index} value={reader.id} >{reader.name}</option>
+                  )
+                })
+              }
+            </select>
+          </div>
           <DatePicker
             selected={returnDate}
             onChange={handleChangeDate}
           />
-          {info ? renderInfo : <span> </span>}
+          {info ? <p style={{color: 'red'}}>Книга не може бути видана. Уже є у читача.</p> : <span> </span>}
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={onClosePopup} color="primary">
+          <Button autoFocus onClick={closeDialog} color="primary">
             Закрити
           </Button>
           <Button autoFocus onClick={handleTakeBook} color="primary">
@@ -105,7 +98,5 @@ const Popup = ({readers, open, onClosePopup, book}) => {
       </Dialog>
   );
 };
-// const mapStateToProps = state => ({
-//   books: state.books
-// });
+
 export default connect()(Popup);

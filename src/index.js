@@ -10,7 +10,6 @@ const store = createStore(
   rootReducer
 );
 
-
 const app = (
   <Provider store={store}>
     <BrowserRouter>

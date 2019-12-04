@@ -16,10 +16,12 @@ const genreName = [
   'Фентезі',
   'Казки',
   'Поезія',
+  "Програмування"
 ];
 
 class AddBook extends Component{
   state = {
+    isValidAdd: true,
     id: 0,
     title: '',
     author: '',
@@ -30,16 +32,15 @@ class AddBook extends Component{
   };
   onChangeTitle = (event) => {
     this.setState({title: event.target.value});
+    this.isValid();
   };
   onChangeAuthor = (event) => {
     this.setState({author: event.target.value});
+    this.isValid();
   };
   onChangeYear = (event) => {
     this.setState({year: event.target.value});
   };
-  // handleFocus = e => {
-  //   e.target.select();
-  // };
   onChangeGenre = event => {
     const { options } = event.target;
     const value = [];
@@ -55,18 +56,25 @@ class AddBook extends Component{
   onChangeNumber = (event) => {
     this.setState({nums: event.target.value});
   };
+  isValid=()=>{
+    const {title, author} = this.state;
+    if(title && author){
+      this.setState({isValidAdd: false})
+    }
+  };
   handleAddBook = () => {
     const {dispatch} = this.props;
     const {title, author, year, genre, nums} = this.state;
     if(title) {
       dispatch(addBook(title, author, year, genre, nums));
       this.setState({
+        isValidAdd: true,
         title: '',
         author: '',
         id: 0,
         year: 1900,
         genre: [],
-        nums: 0,
+        nums: 1,
         type: 'newBook'
       })
     }
@@ -80,12 +88,12 @@ class AddBook extends Component{
     return (
       <form onSubmit={this.onSubmit} className={cls.AddBook}>
         <div>
-          <TextField className={cls.Input} type="text" label="Title" value={this.state.title} onChange={this.onChangeTitle}/>
-          <TextField className={cls.Input} type="text" label="Author" value={this.state.author} onChange={this.onChangeAuthor}/>
+          <TextField className={cls.Input} type="text" label="Назва" value={this.state.title} onChange={this.onChangeTitle}/>
+          <TextField className={cls.Input} type="text" label="Автор" value={this.state.author} onChange={this.onChangeAuthor}/>
         </div>
         <div>
-          <TextField className={cls.Input} type="number" label="Year" value={this.state.year} onChange={this.onChangeYear}/>
-          <TextField className={cls.Input} type="number" label="Nums" value={this.state.nums} onChange={this.onChangeNumber}/>
+          <TextField className={cls.Input} type="number" label="Рік" value={this.state.year} onChange={this.onChangeYear}/>
+          <TextField className={cls.Input} type="number" label="Кількість" value={this.state.nums} onChange={this.onChangeNumber}/>
         </div>
         <div>
           <FormControl className={cls.Input}>
@@ -108,20 +116,18 @@ class AddBook extends Component{
               ))}
             </Select>
           </FormControl>
-          <TextField className={cls.Input} type="text" label="Genre" value={this.state.genre} InputProps={{readOnly: true}} variant="filled"/>
+          <TextField className={cls.Input} type="text" label="Жанр(и)" value={this.state.genre} InputProps={{readOnly: true}} variant="filled"/>
         </div>
 
         <Button
-          classes={{
-            root: 'myClasses'
-          }}
           variant="contained"
           color="primary"
           size="large"
+          disabled={this.state.isValidAdd}
           startIcon={<Save />}
           onClick={this.handleAddBook}
         >
-          Add book
+          Додати книгу
         </Button>
       </form>
     )

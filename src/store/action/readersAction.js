@@ -9,7 +9,6 @@ export const takeBook = (readerId, book)=>{
     }
   }
 };
-
 export const saveDate = (readerId, bookId, newDate)=>{
   return {
     type: CONSTS.SAVE_DATE,

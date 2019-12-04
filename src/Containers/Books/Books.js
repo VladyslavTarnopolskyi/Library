@@ -7,7 +7,7 @@ class Books extends Component{
   render() {
     return (
       <div className={cls.Books}>
-        <h2>Books catalog</h2>
+        <h2>Додати нову книгу в каталог</h2>
         <AddBook books={this.props.books}/>
       </div>
     )

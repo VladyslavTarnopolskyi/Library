@@ -3,11 +3,10 @@ import BooksList from "../../Components/BooksList/BooksList";
 import {connect} from "react-redux";
 
 class Catalog extends Component {
-
   render() {
     return (
       <div>
-        <h2>Catalog</h2>
+        <h2>Каталог</h2>
         <BooksList/>
       </div>
     );

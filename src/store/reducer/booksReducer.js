@@ -6,7 +6,7 @@ const initialState = [
     author: 'Isaac Asimov',
     id: 0,
     year: 1950,
-    genre: ['Fantasy', 'Thriller', 'Detective'],
+    genre: [ 'Детектив', 'Триллер', 'Фантастика'],
     nums: 5,
     dateStart: new Date(),
     dateReturn: new Date(),
@@ -19,6 +19,28 @@ const initialState = [
     year: 2009,
     genre: ['Поезія'],
     nums: 500,
+    dateStart: new Date(),
+    dateReturn: new Date(),
+    type: 'newBook'
+  },
+  {
+    title: 'Вивчаємо JavaScript',
+    author: 'Етан Браун',
+    id: 2,
+    year: 2016,
+    genre: ['Програмування'],
+    nums: 13,
+    dateStart: new Date(),
+    dateReturn: new Date(),
+    type: 'newBook'
+  },
+  {
+    title: 'Велика книга CSS',
+    author: 'Девід Макфарланд',
+    id: 3,
+    year: 2019,
+    genre: ['Програмування'],
+    nums: 300,
     dateStart: new Date(),
     dateReturn: new Date(),
     type: 'newBook'
@@ -58,13 +80,9 @@ export default function booksReducer(state = initialState, action) {
       return newState;
     }
     case CONSTS.EDIT_BOOK: {
-      console.log(action.payload);
       const {bookId, title, author, year, genre, nums} = action.payload;
-      console.log(bookId);
       const newState = [...state];
-
       const book = state[bookId];
-      console.log(book);
       book.title = title;
       book.author = author;
       book.year = year;
@@ -72,9 +90,6 @@ export default function booksReducer(state = initialState, action) {
       book.nums = nums;
       return newState;
     }
-
-
-
     default:
       return state
   }
