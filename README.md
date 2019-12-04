@@ -1,5 +1,7 @@
 # Library
 
 - git clone
-- npm install
-- npm start
+- npm install / yarn install
+- npm start / yarn start
+
+run localhost:3000
